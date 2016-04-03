@@ -33,7 +33,7 @@ namespace CaHm.ViewModel
             CardsOnBoard.Add(new WhiteCardViewModel("YOLo."));
             CardsOnBoard.Add(new WhiteCardViewModel("Ramstein"));
             //CardsOnBoard.Add(new WhiteCardViewModel("Justin Bieber"));
-            //CardsOnBoard.Add(new WhiteCardViewModel("Shitting ur pants"));
+            //CardsOnBoard.Add(new WhiteCar dViewModel("Shitting ur pants"));
             //CardsOnBoard.Add(new WhiteCardViewModel("YOLo."));
             //CardsOnBoard.Add(new WhiteCardViewModel("Ramstein"));
             //CardsOnBoard.Add(new WhiteCardViewModel("Justin Bieber"));
