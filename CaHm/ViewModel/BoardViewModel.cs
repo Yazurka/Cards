@@ -46,7 +46,7 @@ namespace CaHm.ViewModel
             CardsOnHand = new ObservableCollection<WhiteCardViewModel>();
             CardsOnHand.Add(new WhiteCardViewModel("The Pope."));
             CardsOnHand.Add(new WhiteCardViewModel("Hitler."));
-            CardsOnHand.Add(new WhiteCardViewModel("Dead Babys."));
+            CardsOnHand.Add(new WhiteCardViewModel("Dead Babies."));
             CardsOnHand.Add(new WhiteCardViewModel("Expecting a fart but shiting your pants."));
             
         }
