@@ -29,7 +29,7 @@ namespace CaHm.ViewModel
             if (sourceItem != null && targetItem != null && targetItem.CanAcceptChildren)
             {
                 dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;
-                dropInfo.Effects = DragDropEffects.Copy;
+                dropInfo.Effects = DragDropEffects.Move;
             }
         }
 
