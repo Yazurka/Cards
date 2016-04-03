@@ -18,6 +18,18 @@
             <DataTemplate DataType="{x:Type ViewModel:BoardViewModel}">
                 <View:BoardView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModel:BlackCardViewModel}">
+                <View:BlackCardView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModel:WhiteCardViewModel}">
+                <View:WhiteCardView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModel:PlayerViewModel}">
+                <View:PlayerView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModel:ScoreboardViewModel}">
+                <View:ScoreboardView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
