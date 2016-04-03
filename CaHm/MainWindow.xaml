@@ -6,6 +6,6 @@
                       Height="600"
                       Width="800">
 
-    <ContentControl DataContext="{Binding Board}"/>
+    <ContentPresenter Content="{Binding Content}"/>
 
 </Controls:MetroWindow>
