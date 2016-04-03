@@ -7,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace CaHm.ViewModel
 {
-    public class WhiteCardViewModel
+    public class WhiteCardViewModel : ViewModelBase
     {
+        public string Text { get; set; }
+        public WhiteCardViewModel(string text)
+        {
+            Text = text;
+        }
     }
 }

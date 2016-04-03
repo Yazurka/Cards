@@ -5,7 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
-        <Label Content="{Binding Test}"/>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <ContentPresenter Margin="10" Content="{Binding BlackCardViewModel}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <ListBox Grid.Row="0" MaxWidth="900" HorizontalAlignment="Left" Grid.Column="1" Grid.ColumnSpan="3" ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding CardsOnBoard}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+        </ListBox>
+        <ListBox Grid.Row="1" Grid.ColumnSpan="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding CardsOnHand}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            
+        </ListBox>
+    </Grid>
     
 </UserControl>

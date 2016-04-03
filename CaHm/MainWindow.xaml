@@ -3,8 +3,8 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
                       Title="Cards"
-                      Height="600"
-                      Width="800">
+                      Height="700"
+                      Width="1200">
 
     <ContentPresenter Content="{Binding Content}"/>
 
