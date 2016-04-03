@@ -10,6 +10,7 @@ namespace CaHm.ViewModel
     public class WhiteCardViewModel : ViewModelBase
     {
         public string Text { get; set; }
+        public bool CanAcceptChildren { get; set; }
         public WhiteCardViewModel(string text)
         {
             Text = text;

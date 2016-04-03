@@ -1,13 +1,15 @@
-﻿using System;
+﻿using GongSolutions.Wpf.DragDrop;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CaHm.ViewModel
 {
-    public class BoardViewModel : ViewModelBase
+    public class BoardViewModel : ViewModelBase, IDropTarget
     {
         private BlackCardViewModel m_blackCardViewModel;
         private ObservableCollection<WhiteCardViewModel> m_cardsOnHand;
@@ -19,6 +21,26 @@ namespace CaHm.ViewModel
             generateWhitecardsOnHand();
             generateWhitecardsOnBoard();
         }
+        void IDropTarget.DragOver(IDropInfo dropInfo)
+        {
+            WhiteCardViewModel sourceItem = dropInfo.Data as WhiteCardViewModel;
+            WhiteCardViewModel targetItem = dropInfo.TargetItem as WhiteCardViewModel;
+
+            if (sourceItem != null && targetItem != null && targetItem.CanAcceptChildren)
+            {
+                dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;
+                dropInfo.Effects = DragDropEffects.Copy;
+            }
+        }
+
+        void IDropTarget.Drop(IDropInfo dropInfo)
+        {
+            WhiteCardViewModel sourceItem = dropInfo.Data as WhiteCardViewModel;
+            WhiteCardViewModel targetItem = dropInfo.TargetItem as WhiteCardViewModel;
+            this.CardsOnBoard.Add(sourceItem);
+            this.CardsOnHand.Remove(sourceItem);
+            
+        }
         private void generateWhitecardsOnHand()
         {
             CardsOnHand = new ObservableCollection<WhiteCardViewModel>();
@@ -26,12 +48,17 @@ namespace CaHm.ViewModel
             CardsOnHand.Add(new WhiteCardViewModel("Hitler."));
             CardsOnHand.Add(new WhiteCardViewModel("Dead Babys."));
             CardsOnHand.Add(new WhiteCardViewModel("Expecting a fart but shiting your pants."));
+            
         }
         private void generateWhitecardsOnBoard()
         {
             CardsOnBoard = new ObservableCollection<WhiteCardViewModel>();
             CardsOnBoard.Add(new WhiteCardViewModel("YOLo."));
             CardsOnBoard.Add(new WhiteCardViewModel("Ramstein"));
+            foreach (var card in CardsOnBoard)
+            {
+                card.CanAcceptChildren = true;
+            }
             //CardsOnBoard.Add(new WhiteCardViewModel("Justin Bieber"));
             //CardsOnBoard.Add(new WhiteCar dViewModel("Shitting ur pants"));
             //CardsOnBoard.Add(new WhiteCardViewModel("YOLo."));
