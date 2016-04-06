@@ -25,33 +25,15 @@ namespace CaHm.ViewModel
             BlackCardViewModel = new BlackCardViewModel();
             generateWhitecardsOnHand();
             generateWhitecardsOnBoard();
-            //try
-            //{
-                var querystringData = new Dictionary<string, string>();
-                querystringData.Add("name", "asad");
-                querystringData.Add("message", "sdfsdsd");
-                m_hubConnection = new HubConnection("http://localhost:8080", querystringData);
+           
+                m_hubConnection = new HubConnection("http://localhost:8080");
                 m_hubProxy = m_hubConnection.CreateHubProxy("MyHub");
-                m_hubProxy.On<string, string>("Send", lol);
-            
-                ServicePointManager.DefaultConnectionLimit = 1;
                 m_hubConnection.Start().Wait();
-                //m_hubProxy.On<string, string>("Send", (name, message) =>
-                //{
-                //    MessageBox.Show("Name " + name + " Message " + message);
-                //});
-              
                 m_hubConnection.Received += m_hubConnection_Received;
-            //}catch(Exception ex){
-            //    throw ex;
-            //}
-            
+    
         }
-        private void lol(string name, string message)
-        {
-
-        }
-        private void m_hubConnection_Received(string obj)
+       
+        private void m_hubConnection_Received(Object obj)
         {
             MessageBox.Show("Recived");
         }
@@ -71,6 +53,17 @@ namespace CaHm.ViewModel
 
         void IDropTarget.Drop(IDropInfo dropInfo)
         {
+            m_hubProxy.Invoke("Send", "client message", " sent from console client").ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    // HubClientEvents.Log.Error("There was an error opening the connection:" + task.Exception.GetBaseException());
+                }
+
+            }).Wait();
+
+            //m_hubConnection.Send("Data").Wait(); //Maaaybe this?
+
             //var querystringData = new Dictionary<string, string>();
             //querystringData.Add("contosochatversion", "1.0");
             //m_hubConnection.Send(querystringData).Wait();
