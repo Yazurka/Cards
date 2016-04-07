@@ -4,6 +4,9 @@ using Microsoft.Owin.Hosting;
 using Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin;
+using System;
+using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 
 namespace CaHm.Server
@@ -45,11 +48,38 @@ namespace CaHm.Server
             app.MapSignalR();
         }
     }
+
     public class MyHub : Hub
     {
-        public void Send(string name, string message)
+        private static readonly ConcurrentDictionary<string, User> Users
+         = new ConcurrentDictionary<string, User>();
+        public MyHub()
         {
-            Clients.All.addMessage(name, message);
+           
+        }
+        
+        public override System.Threading.Tasks.Task OnConnected()
+        {
+            string connectionId = Context.ConnectionId;
+            
+            return base.OnConnected();
+        }
+        public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
+        {
+            string userName = Context.User.Identity.Name;
+            string connectionId = Context.ConnectionId;
+            return base.OnDisconnected(stopCalled);
+        }
+        public override System.Threading.Tasks.Task OnReconnected()
+        {
+            string userName = Context.User.Identity.Name;
+            string connectionId = Context.ConnectionId;
+            return base.OnReconnected();
+        }
+        
+        public void Send(Message message)
+        {
+            Clients.All.addMessage(message);
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Windows;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.AspNet.SignalR.WebSockets;
 using System.Net;
+using Microsoft.AspNet.SignalR.Json;
+using System.Text.RegularExpressions;
 
 namespace CaHm.ViewModel
 {
@@ -27,14 +29,19 @@ namespace CaHm.ViewModel
             generateWhitecardsOnBoard();
            
                 m_hubConnection = new HubConnection("http://localhost:8080");
+                m_hubConnection.Credentials = CredentialCache.DefaultCredentials;
                 m_hubProxy = m_hubConnection.CreateHubProxy("MyHub");
+           
                 m_hubConnection.Start().Wait();
                 m_hubConnection.Received += m_hubConnection_Received;
     
         }
        
-        private void m_hubConnection_Received(Object obj)
+        private void m_hubConnection_Received(string obj)
         {
+            
+            var recievedData = Newtonsoft.Json.JsonConvert.DeserializeObject<ReceivedData>(obj);
+            var message = recievedData.A.FirstOrDefault();
             MessageBox.Show("Recived");
         }
          void IDropTarget.DragOver(IDropInfo dropInfo)
@@ -53,20 +60,31 @@ namespace CaHm.ViewModel
 
         void IDropTarget.Drop(IDropInfo dropInfo)
         {
-            m_hubProxy.Invoke("Send", "client message", " sent from console client").ContinueWith(task =>
+            //m_hubProxy.Invoke("Send", "client message", " sent from console client").ContinueWith(task =>
+            //{
+            //    if (task.IsFaulted)
+            //    {
+            //        // HubClientEvents.Log.Error("There was an error opening the connection:" + task.Exception.GetBaseException());
+            //    }
+
+            //}).Wait();
+          
+            var messageToBeString = new Message { Metadata = new Metadata {GroupId="G1",PlayerId="P1" },Payload = "PayloadString" };
+
+            var test = Newtonsoft.Json.JsonConvert.SerializeObject(messageToBeString);
+            var message = new Message { Metadata = new Metadata { GroupId = "G1", PlayerId = "P1" }, Payload = test };
+            m_hubProxy.Invoke("Send", message).ContinueWith(task =>
             {
                 if (task.IsFaulted)
                 {
-                    // HubClientEvents.Log.Error("There was an error opening the connection:" + task.Exception.GetBaseException());
+                    
                 }
 
             }).Wait();
 
             //m_hubConnection.Send("Data").Wait(); //Maaaybe this?
 
-            //var querystringData = new Dictionary<string, string>();
-            //querystringData.Add("contosochatversion", "1.0");
-            //m_hubConnection.Send(querystringData).Wait();
+           
             WhiteCardViewModel sourceItem = dropInfo.Data as WhiteCardViewModel;
             WhiteCardViewModel targetItem = dropInfo.TargetItem as WhiteCardViewModel;
             this.CardsOnBoard.Add(sourceItem);
