@@ -48,7 +48,7 @@ namespace CaHm.Server
             app.MapSignalR();
         }
     }
-
+    
     public class MyHub : Hub
     {
         private static readonly ConcurrentDictionary<string, User> Users
@@ -57,7 +57,6 @@ namespace CaHm.Server
         {
            
         }
-        
         public override System.Threading.Tasks.Task OnConnected()
         {
             string connectionId = Context.ConnectionId;
@@ -66,13 +65,11 @@ namespace CaHm.Server
         }
         public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
         {
-            string userName = Context.User.Identity.Name;
             string connectionId = Context.ConnectionId;
             return base.OnDisconnected(stopCalled);
         }
         public override System.Threading.Tasks.Task OnReconnected()
         {
-            string userName = Context.User.Identity.Name;
             string connectionId = Context.ConnectionId;
             return base.OnReconnected();
         }
@@ -80,6 +77,7 @@ namespace CaHm.Server
         public void Send(Message message)
         {
             Clients.All.addMessage(message);
+            
         }
     }
 }
