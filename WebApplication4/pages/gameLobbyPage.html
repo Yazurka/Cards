@@ -1,6 +1,32 @@
 ﻿<!-- gameLobbyPage.html -->
-<div class="jumbotron text-center">
-    <h1>Game Lobby</h1>
-    <h2>Session ID: {{ gameID }}</h2>
-    
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1>Game Lobby</h1>
+        <h2>Session ID: {{ gameID }}</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="sel1">Select cardpacks:</label>
+                <select multiple class="form-control" id="sel2">
+                    <option>Political pack</option>
+                    <option>Racist pack</option>
+                    <option>Celebrity pack</option>
+                    <option>Dickbutt pack</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Some other options</h3>
+        </div>
+        <div class="col-sm-4">
+            <h3>Lobby</h3>
+            <ul class="list-group">
+                <li class="list-group-item">Dickbutt</li>
+                <li class="list-group-item">Batman</li>
+                <li class="list-group-item">Chuck Norris</li>
+            </ul>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary btn-block">Start game</button>
 </div>
