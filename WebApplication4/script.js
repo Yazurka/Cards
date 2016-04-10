@@ -21,10 +21,17 @@ scotchApp.config(function ($routeProvider) {
         })
 
         // route for the game lobby page
-        .when('/gameLobby/:id', {
+        .when('/gameLobby/:id', { 
             templateUrl: 'pages/gameLobbyPage.html',
             controller: 'gameLobbyController'
+        })
+
+            // route for the game page
+        .when('/game/:id', {
+            templateUrl: 'pages/boardPage.html',
+            controller: 'boardController'
         });
+
 });
 
 scotchApp.controller('mainController', function ($scope) {
@@ -52,11 +59,18 @@ scotchApp.controller('startpageController', function ($scope, $routeParams, $loc
     };
     $scope.joinGame = function () {
         $scope.$emit('gameIdEvent', $scope.gameID);
-        $location.url('/gameLobby/' + $scope.gameID);
+        $location.url('/gameLobby/' + $scope.gameID)
     };
 });
 
-scotchApp.controller('gameLobbyController', function ($scope, $http, $routeParams) {
+scotchApp.controller('gameLobbyController', function ($scope, $http, $routeParams, $location) {
     $scope.gameID = $routeParams.id;
+    $scope.startGame = function () {
+        $location.url('/game/' + $scope.gameID)
+    };
+});
+
+scotchApp.controller('boardController', function ($scope) {
+  
 });
 
