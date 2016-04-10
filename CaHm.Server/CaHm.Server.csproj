@@ -80,8 +80,16 @@
     <Compile Include="CaHmService.Designer.cs">
       <DependentUpon>CaHmService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cards.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cards.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CardParser.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Metadata.cs" />
+    <Compile Include="Model\BlackCard.cs" />
+    <Compile Include="Model\WhiteCard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -91,6 +99,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="WhiteCards.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -100,9 +109,17 @@
     <EmbeddedResource Include="CaHmService.resx">
       <DependentUpon>CaHmService.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cards.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Cards.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BlackCards.txt" />
+    <Content Include="WhiteCards.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -90,6 +90,7 @@
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\ReceivedData.cs" />
     <Compile Include="ViewModel\ScoreboardViewModel.cs" />
+    <Compile Include="ViewModel\User.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WhiteCardViewModel.cs" />
     <Compile Include="View\BlackCardView.xaml.cs">

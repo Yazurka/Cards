@@ -73,7 +73,16 @@ namespace CaHm.ViewModel
 
             var test = Newtonsoft.Json.JsonConvert.SerializeObject(messageToBeString);
             var message = new Message { Metadata = new Metadata { GroupId = "G1", PlayerId = "P1" }, Payload = test };
-            m_hubProxy.Invoke("Send", message).ContinueWith(task =>
+            m_hubProxy.Invoke("CreateGame").ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+
+                }
+
+            }).Wait();
+            var user = new User { GroupId = "63760", Name = "Marius" };
+            m_hubProxy.Invoke("JoinGame", user).ContinueWith(task =>
             {
                 if (task.IsFaulted)
                 {
@@ -81,7 +90,7 @@ namespace CaHm.ViewModel
                 }
 
             }).Wait();
-
+             //63760
             //m_hubConnection.Send("Data").Wait(); //Maaaybe this?
 
            
