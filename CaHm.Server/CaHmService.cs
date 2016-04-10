@@ -60,6 +60,21 @@ namespace CaHm.Server
         public override System.Threading.Tasks.Task OnConnected()
         {
             string connectionId = Context.ConnectionId;
+           
+                var user = new User { ConnectionId = connectionId };
+                Users.AddOrUpdate(connectionId, user, (key, existingVal) =>
+                {
+                    
+                    if (user != existingVal)
+                        throw new ArgumentException("Duplicate city names are not allowed: {0}.", user.ConnectionId);
+
+                    // The only updatable fields are the temerature array and lastQueryDate.
+                    
+                    return existingVal;
+                });
+                   
+            
+           
             
             return base.OnConnected();
         }
